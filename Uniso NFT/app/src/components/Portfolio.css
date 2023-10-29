@@ -1,0 +1,22 @@
+.port {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  #BlureEffect {
+    backdrop-filter: blur(10px);
+    /* Adjust the blur amount as needed */
+    opacity: 50px;
+  }
+  
+  canvas {
+    width: 100%;
+    z-index: -1;
+  }
+  

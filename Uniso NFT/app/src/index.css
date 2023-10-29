@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes gradientChange {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+#gradient-text {
+  animation: gradientChange 5s linear infinite;
+  background-size: 200% 100%;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Home.css */
+@import url("https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&family=Lato&family=Oxygen&display=swap");
+
+/* Your other styles go here */
+body {
+  background-image: url("./bg1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#parad {
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.bn632-hover {
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  margin-left: 5px;
+  height: 55px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.bn632-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.bn632-hover:focus {
+  outline: none;
+}
+
+.bn632-hover.bn24 {
+  background-image: linear-gradient(
+    to right,
+    #6253e1,
+    #852d91,
+    #a3a1ff,
+    #f24645
+  );
+  box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+}
+
+.bn11-hover {
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align: center;
+  border: #9ca3af 0.2em solid;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.bn11-hover:hover {
+  cursor: pointer;
+  background-color: #9ca3af;
+  color: white;
+}
+
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.42) 31.77%,
+    #e0e0e0 100%
+  );
+  mix-blend-mode: color-dodge;
+  -webkit-animation: move 25s infinite alternate;
+  animation: move 25s infinite alternate;
+  transition: 1s cubic-bezier(0.07, 0.8, 0.16, 1);
+}
+
+.blob:hover {
+  width: 520px;
+  height: 520px;
+  -webkit-filter: blur(30px);
+  filter: blur(30px);
+  box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.6),
+    inset 100px 100px 0 0px #e0e0e0, inset 200px 200px 0 0px #e0e0e0,
+    inset 300px 300px 0 0px #e0e0e0;
+}
+
+@-webkit-keyframes move {
+  from {
+    transform: translate(-100px, -50px) rotate(-90deg);
+    border-radius: 24% 76% 35% 65% / 27% 36% 64% 73%;
+  }
+
+  to {
+    transform: translate(100px, 50px) rotate(-10deg);
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translate(-100px, -50px) rotate(-90deg);
+    border-radius: 24% 76% 35% 65% / 27% 36% 64% 73%;
+  }
+
+  to {
+    transform: translate(100px, 50px) rotate(-10deg);
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+  }
+}
+
+.blobanimation {
+  background-image: url("./blobanimation.svg");
+  background-repeat: no-repeat;
+  z-index: -1;
+  margin-top: -60px;
+  width: 100%;
+  height: 600px;
+}

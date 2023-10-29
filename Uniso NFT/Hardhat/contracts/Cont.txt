@@ -1,0 +1,102 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+
+contract NFTMarketplaceToken is ERC1155 {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+
+    uint256 public constant SecureKloud = 1;
+    uint256 public constant Kloud = 3;
+    
+    // State variable to store the total number of NFTs
+    uint256 public totalNFTs;
+    // Function to retrieve the total number of NFTs stored
+
+    mapping(uint256 => string) private metadatas;
+
+    struct NFT {
+        uint256 id;
+        address owner;
+        uint256 price;
+        uint256 availableCount;
+    }
+
+    mapping(string => NFT) private nfts;
+
+    constructor() ERC1155("https://emerald-inevitable-snail-562.mypinata.cloud") {}
+
+    function mint(uint256 tokenCount, string calldata dataHash, uint256 priceInEther) public returns(uint256) {
+        _tokenIds.increment();
+        uint256 newItemId = _tokenIds.current();
+        _mint(msg.sender, newItemId, tokenCount, "");
+        metadatas[newItemId] = dataHash;
+
+        if (nfts[dataHash].id == 0) {
+            nfts[dataHash] = NFT(newItemId, msg.sender, priceInEther, tokenCount);
+        } else {
+            nfts[dataHash].availableCount += tokenCount;
+        }
+        // Update the totalNFTsStored variable
+        totalNFTs = _tokenIds.current();
+
+        return newItemId;
+    }
+
+    function uri(uint256 tokenId) public view override returns (string memory) {
+        string memory hash = metadatas[tokenId];
+        return hash;
+    }
+
+    function buyNFT(string calldata metaDataHash, uint256 totalCount) public payable {
+        (uint256 id, address owner, uint256 price, uint256 availableCount) = getNFTDetails(metaDataHash);
+
+        require(id != 0, "NFT does not exist");
+        require(availableCount >= totalCount, "Insufficient NFTs available for sale");
+
+        // Ensure that the sent value matches the calculated price
+        uint256 totalPrice = price * totalCount;
+        require(msg.value >= totalPrice * 1 ether, "Insufficient funds sent");
+
+        // Transfer ownership of the NFT to the buyer
+        nfts[metaDataHash].owner = msg.sender;
+
+        address payable nftOwner = payable(owner);
+        nftOwner.transfer(totalPrice * 1 ether); // Transfer funds to the owner
+        _safeTransferFrom(nftOwner, msg.sender, id, totalCount, ""); // Transfer the NFT to the buyer
+
+        // Update the available count of the NFT
+        availableCount -= totalCount;
+        if (availableCount == 0) {
+            price = 0; // Mark the NFT as sold
+        }
+    }
+
+
+    function getNFTDetails(string calldata metaDataHash) public view returns (uint256 id, address owner, uint256 price, uint256 availableCount) {
+        NFT storage nft = nfts[metaDataHash];
+        require(nft.id != 0, "NFT does not exist");
+        return (nft.id, nft.owner, nft.price, nft.availableCount);
+    }
+
+    function getNFTOwner(string calldata metaDataHash) public view returns (address) {
+        NFT storage nft = nfts[metaDataHash];
+        require(nft.id != 0, "NFT does not exist");
+        return nft.owner;
+    }  
+    
+    function getNFTPrice(string calldata metaDataHash) public view returns (uint256 price) {
+        NFT storage nft = nfts[metaDataHash];
+        require(nft.id != 0, "NFT does not exist");
+        return nft.price;
+    }
+}
+
+
+
+{
+  "NFTMarketplaceToken": "0x31f4C58C163EC5ae71fC49a4c332d902596AEead"
+}

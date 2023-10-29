@@ -1,0 +1,57 @@
+.Btn {
+    width: 145px;
+    height: 45px;
+    background: linear-gradient(-45deg, #6bc5f8, #cf59e6, #6bc5f8, #cf59e6);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 5px 5px 0px #4dc6d93d;
+    background-size: 400% 400%;
+  }
+  
+  .svgContainer {
+    width: 45px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .svgContainer svg {
+    width: 16px;
+  }
+  
+  .svgContainer svg path {
+    fill: white;
+  }
+  
+  .textContainer {
+    width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .Btn:hover {
+    animation: gradient 5s ease infinite;
+  }
+  /* Button's gradient animation */
+  @keyframes gradient {
+    0% {
+      background-position: 0 50%;
+    }
+  
+    50% {
+      background-position: 100% 50%;
+    }
+  
+    100% {
+      background-position: 0 50%;
+    }
+  }
