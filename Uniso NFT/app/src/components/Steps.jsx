@@ -33,6 +33,7 @@ function Steps() {
   const contractAddress = '0xc40d3f0Dbd02775897Ccc6f09D62288be7aa4A91';
   const [contract, setContract] = useState(null);
   const [nftcontract, setNFTContract] = useState(null);
+  const [nftsigner, setNftsign] = useState('');
 
 
 
@@ -102,6 +103,7 @@ setsiggn(signer.address);
       const provider = new ethers.BrowserProvider(ethereum);
       // Request access to the user's Ethereum wallet
 const signer = await provider.getSigner();
+setNftsign(signer);
       // Create a contract instance
       const nfttcontract = new ethers.Contract(contractAddress, contractABI, signer);
       setNFTContract(nfttcontract);
@@ -398,7 +400,7 @@ const subscribe = async () => {
         const updatedJsonCIDWithGateway = (updatedJsonCID.pinataURL);
         
         // Mint the NFT with the updated JSON data CID
-        const txResponse = await nftcontract.mintNFT("0x6F6dd186Da0aB5A2189fF95b316B336979b8373E", updatedJsonCIDWithGateway);
+        const txResponse = await nftcontract.mintNFT(nftsigner, updatedJsonCIDWithGateway);
   
         // Wait for the transaction to be mined
         const txReceipt = await txResponse.wait();
@@ -517,7 +519,7 @@ const subscribe = async () => {
                             &nbsp;32€&nbsp;
                           </span> */}
                           <span className="pb-2 text-4xl text-violet-400">
-                            100 XDC
+                            5 XDC
                           </span>
                           {/* <span className="text-lg text-violet-400">/mo</span> */}
                         </p>
@@ -910,9 +912,9 @@ const subscribe = async () => {
                 <h3 className="text-lg font-semibold text-gray-700">
                 </h3>
                 <p className="text-gray-600 relative top-4">
-                  Your Identity has been Minted Successfully. Click here to download your identity
+                  You can mint your identity here.
                 </p>
-                <div id="NFTCard" className="bg-[#F0EFEA] shadow-2xl relative left-[270px] top-7 p-4 rounded-lg w-11/12 max-w-xs md:max-w-md lg:max-w-lg h-20 md:h-72 lg:h-200 transform translate-x-4 transition-transform duration-500 flex items-center justify-center">
+                <div id="NFTCard" className="bg-[#F0EFEA] shadow-2xl relative left-[0px] top-7 p-4 rounded-lg w-11/12 max-w-xs md:max-w-md lg:max-w-lg h-20 md:h-72 lg:h-200 transform translate-x-4 transition-transform duration-500 flex items-center justify-center">
                     <div className="flex flex-col md:flex-row h-full items-center">
                       {/* Left Column */}
                       <div className="md:w-1/2 text-black">
@@ -1020,11 +1022,12 @@ const subscribe = async () => {
           {ownerAddress && isLastStep && !hash2 && (
   <div className="flex justify-end mt-4">
      <button
+     style={{position:"relative", left:"-50px", top:"-20px"}}
       className="px-4 py-2 mr-40 text-white bg-violet-500 rounded-lg hover-bg-green-600 "
       onClick={captureElementAsFile}
        disabled={loading2 || success2} 
     >
-              {loading2 ? 'Loading...' : success2 ? 'Go to App' : 'MInt NFT'}
+              {loading2 ? 'Loading...' : success2 ? 'Go to App' : 'Mint NFT'}
 
     </button>
     {loading2 ? <LoadN /> : null}
