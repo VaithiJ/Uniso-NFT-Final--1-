@@ -205,7 +205,7 @@ const ipfs = create({ host: 'ipfs.io', port: 443, protocol: 'https' });
 
 function Portfolio() {
   const contractABI = ["function getTokenCIDBySigner(address) public view returns (string memory)"];
-  const contractAddress = '0xc40d3f0Dbd02775897Ccc6f09D62288be7aa4A91';
+  const contractAddress = '0x0eB18e650E0363011eE94E4Be9952B5C53e2d90B';
   const [ownerAddress, setOwnerAddress] = useState(null);
   const { address, chainId, connectWallet } = useWeb3();
   const [signerr, setSigner] = useState("")

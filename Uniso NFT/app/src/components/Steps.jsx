@@ -27,10 +27,10 @@ import { parse } from "@fortawesome/fontawesome-svg-core";
 function Steps() {
   const navigate = useNavigate();
 
-  const erc20Address = '0xe864F19104DD53a587917DeAEfB2537E2da9E6B0';
+  const erc20Address = '0x239579dacc83217dd6EFEB69567177100e932aB6';
   const ercabi = ["function sendToDeployer() public payable"]
   const contractABI = ["function mintNFT(address _to, string memory _tokenCID) public"]
-  const contractAddress = '0xc40d3f0Dbd02775897Ccc6f09D62288be7aa4A91';
+  const contractAddress = '0x0eB18e650E0363011eE94E4Be9952B5C53e2d90B';
   const [contract, setContract] = useState(null);
   const [nftcontract, setNFTContract] = useState(null);
   const [nftsigner, setNftsign] = useState('');

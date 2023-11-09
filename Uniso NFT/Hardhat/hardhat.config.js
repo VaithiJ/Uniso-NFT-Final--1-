@@ -12,6 +12,14 @@ module.exports = {
       
       // chainId:51,
     },
+    wanchain : {
+      url: process.env.WANCHAIN_URL,
+      accounts : [
+        process.env.WAN_PRIVATE_KEY
+      ],
+      gasPrice: 20000000000 // 20 gwei
+
+    },
     sepoli: {
       url: process.env.SEPOLIA_URL,
       accounts: [
